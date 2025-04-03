@@ -1,15 +1,12 @@
 package com.backend.membership.application.service;
 
+import com.backend.common.UseCase;
 import com.backend.membership.adapter.out.persistence.MembershipJpaEntity;
 import com.backend.membership.adapter.out.persistence.MembershipMapper;
 import com.backend.membership.application.port.in.ModifyMembershipCommand;
 import com.backend.membership.application.port.in.ModifyMembershipUseCase;
-import com.backend.membership.application.port.in.RegisterMembershipCommand;
-import com.backend.membership.application.port.in.RegisterMembershipUseCase;
 import com.backend.membership.application.port.out.ModifyMembershipPort;
-import com.backend.membership.application.port.out.RegisterMembershipPort;
 import com.backend.membership.domain.Membership;
-import common.UseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 

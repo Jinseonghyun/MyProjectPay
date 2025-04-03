@@ -1,6 +1,6 @@
 package com.backend.membership.application.port.in;
 
-import common.SelfValidating;
+import com.backend.common.SelfValidating;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;

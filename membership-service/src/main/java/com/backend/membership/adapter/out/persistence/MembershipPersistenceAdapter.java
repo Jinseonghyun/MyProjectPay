@@ -1,10 +1,10 @@
 package com.backend.membership.adapter.out.persistence;
 
+import com.backend.common.PersistenceAdapter;
 import com.backend.membership.application.port.out.FindMembershipPort;
 import com.backend.membership.application.port.out.ModifyMembershipPort;
 import com.backend.membership.application.port.out.RegisterMembershipPort;
 import com.backend.membership.domain.Membership;
-import common.PersistenceAdapter;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
