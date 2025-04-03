@@ -1,0 +1,62 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.4.4'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'com.palantir.docker' version '0.35.0'
+}
+
+group = 'com.backend.membership'
+version = '1.0.2'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(path: ':common')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.projectlombok:lombok'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
+    implementation 'org.jetbrains:annotations:24.1.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'com.tngtech.archunit:archunit-junit5:1.3.0'
+//    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+docker {
+    // 이미지 이름 설정 - 문자열 연결 방식 수정
+    name "${rootProject.name.toLowerCase()}-${project.name.toLowerCase()}-${version.toLowerCase()}"
+
+    // Dockerfile 지정 방식 수정
+    dockerfile file('../Dockerfile')
+
+    // 파일 지정 방식 수정
+    files tasks.bootJar.outputs.files
+
+    // buildArgs 타입 수정 - String으로 명시적 변환
+    buildArgs(['JAR_FILE': tasks.bootJar.outputs.files.singleFile.name.toString()])
+}
+
+// 필요하다면 별도로 출력
+task printJarOutput {
+    doLast {
+        println "JAR outputs: ${tasks.bootJar.outputs.files}"
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
